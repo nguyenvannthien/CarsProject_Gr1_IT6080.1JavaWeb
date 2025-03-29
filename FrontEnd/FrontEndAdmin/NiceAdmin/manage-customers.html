@@ -190,26 +190,21 @@
                     <td>Michael Brown</td>
                     <td>michael.brown@example.com</td>
                     <td>FaceBook</td>
-                    <td>
-
+                    
+                    <td> 
+                      <button class="button-listcars" 
+                      data-bs-toggle="modal" 
+                      data-bs-target="#editCustomerModal">
+                          <i class="ri-edit-line"></i>
+                          Edit</button>
                     </td>
-                    <td>
-                      <button class="btn btn-primary btn-sm edit-btn"
+                    <td >
+                      <button class="button-listcars" 
                               data-bs-toggle="modal"
-                              data-bs-target="#editCustomerModal"
-                              data-id="CUS003"
-                              data-name="Michael Brown"
-                              data-email="michael.brown@example.com"
-                              data-provider="FaceBook">
-                        <i class="bi bi-pencil"></i>
-                      </button>
-                      <button class="btn btn-danger btn-sm delete-btn"
-                              data-bs-toggle="modal"
-                              data-bs-target="#deleteCustomerModal"
-                              data-id="CUS003">
-                        <i class="bi bi-trash"></i>
-                      </button>
-                    </td>
+                              data-bs-target="#deleteCustomerModal">
+                          <i class="ri-delete-bin-6-line"></i>
+                          Delete</button>
+                   </td>
                   </tr>
                 </tbody>
               </table>
@@ -229,9 +224,8 @@
     <div class="modal fade" id="editCustomerModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Edit Customer</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="modal-header justify-content-center">
+            <h5 class="modal-title text-center">Edit Customer</h5>
           </div>
           <div class="modal-body">
             <form id="editCustomerForm">
@@ -253,13 +247,14 @@
               </div>
             </form>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <div class="modal-footer d-flex justify-content-center">
             <button type="button" class="btn btn-primary" id="saveChangesBtn">Save changes</button>
           </div>
         </div>
       </div>
     </div>
+    
+    
 
     <!-- Delete Confirmation Modal -->
     <div class="modal fade" id="deleteCustomerModal" tabindex="-1">
@@ -308,58 +303,32 @@
   <script src="assets/js/main.js"></script>
 
   <!-- Custom JS for Modals -->
+  
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Edit Modal
-      var editModal = document.getElementById('editCustomerModal');
-      editModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget; // Button that triggered the modal
-        var id = button.getAttribute('data-id');
-        var name = button.getAttribute('data-name');
-        var email = button.getAttribute('data-email');
-        var provider = button.getAttribute('data-provider');
-
-        // Populate the modal form
-        var modalId = editModal.querySelector('#customerId');
-        var modalName = editModal.querySelector('#fullName');
-        var modalEmail = editModal.querySelector('#email');
-        var modalProvider = editModal.querySelector('#provider');
-
-        modalId.value = id;
-        modalName.value = name;
-        modalEmail.value = email;
-        modalProvider.value = provider;
-      });
-
-      // Handle Save Changes (placeholder)
-      document.getElementById('saveChangesBtn').addEventListener('click', function () {
-        var id = document.getElementById('customerId').value;
-        var name = document.getElementById('fullName').value;
-        var email = document.getElementById('email').value;
-        var provider = document.getElementById('provider').value;
-        console.log('Saving changes for customer:', { id, name, email, provider });
-        // In a real app, send this data to the server via AJAX
-        bootstrap.Modal.getInstance(editModal).hide();
-      });
-
-      // Delete Modal
-      var deleteModal = document.getElementById('deleteCustomerModal');
-      var confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-
-      deleteModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget; // Button that triggered the modal
-        var id = button.getAttribute('data-id');
-        confirmDeleteBtn.setAttribute('data-id', id);
-      });
-
-      confirmDeleteBtn.addEventListener('click', function () {
-        var id = this.getAttribute('data-id');
-        console.log('Deleting customer with ID:', id);
-        // In a real app, send delete request to the server
-        bootstrap.Modal.getInstance(deleteModal).hide();
-      });
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy tất cả các nút "Edit"
+        const editButtons = document.querySelectorAll(".edit-btn");
+  
+        editButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                // Giả sử bạn có dữ liệu khách hàng từ hàng chứa nút này
+                let row = this.closest("tr"); // Lấy hàng (row) chứa nút được nhấn
+  
+                let customerId = row.querySelector(".customer-id").innerText;
+                let fullName = row.querySelector(".customer-name").innerText;
+                let email = row.querySelector(".customer-email").innerText;
+                let provider = row.querySelector(".customer-provider").innerText;
+  
+                // Gán dữ liệu vào các input của modal
+                document.getElementById("customerId").value = customerId;
+                document.getElementById("fullName").value = fullName;
+                document.getElementById("email").value = email;
+                document.getElementById("provider").value = provider;
+            });
+        });
     });
   </script>
+  
 
 </body>
 </html>
