@@ -250,6 +250,7 @@ h6 {
   padding: 0 20px 20px 20px;
 }
 
+
 .card-img-overlay {
   background-color: rgba(255, 255, 255, 0.6);
 }
@@ -763,7 +764,7 @@ h6 {
 /* Filter dropdown */
 .dashboard .filter {
   position: absolute;
-  right: 0px;
+  right: 30px;
   top: 15px;
 }
 
@@ -1230,4 +1231,26 @@ h6 {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+
+.button-listcars, .button-addcars{
+  background-color: white;
+  color: black;
+  font-size: 15px;
+  padding: 3px 14px;
+  border: 1px solid black;
+  border-radius: 19px; /* Bo góc mềm mại */
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.button-listcars:hover{
+  box-shadow:   0px 5px 5px  rgba(0, 0, 0, 1); /* Đổ bóng */
+   transform: translateY(-1px); /* Nhẹ nhàng nâng lên */
+}
+
+.button-addcars:hover{
+  box-shadow: 0px 5px 5px rgba(0,0,0,1);
+  transform: translateY(-1px);
+  transition: 0.5s;
 }
